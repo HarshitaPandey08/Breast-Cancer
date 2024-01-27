@@ -1,0 +1,77 @@
+/****** Script for SelectTopNRows command from SSMS  ******/
+SELECT TOP (1000) [Age]
+      ,[BMI]
+      ,[Glucose]
+      ,[Insulin]
+      ,[HOMA]
+      ,[Leptin]
+      ,[Adiponectin]
+      ,[Resistin]
+      ,[MCP#1]
+      ,[Classification]
+  FROM [sql].[dbo].[Coimbra_breast_cancer_dataset]
+
+  --Total Columns
+  select count(age)
+  FROM [sql].[dbo].[Coimbra_breast_cancer_dataset]
+
+  --DATA EXPLORATION
+
+  -- 1. NULL Values
+  select * from 
+  [sql].[dbo].[Coimbra_breast_cancer_dataset]
+  where age is NULL or BMI is NULL or Glucose is NULL or Insulin is NULL or
+  HOMA is null or Leptin is NULL or Adiponectin is NULL or Resistin is NULL or
+  MCP#1 is NULL or Classification is NULL 
+
+  -- 2. Special Characters
+  Select * from [sql].[dbo].[Coimbra_breast_cancer_dataset]
+  where age like '%[^A-Za-z0-9]%' 
+  
+  Select * from [sql].[dbo].[Coimbra_breast_cancer_dataset]
+  where BMI like '%[^A-Za-z0-9.]%' 
+  
+  Select * from [sql].[dbo].[Coimbra_breast_cancer_dataset]
+  where Glucose like '%[^A-Za-z0-9]%' 
+  
+  Select * from [sql].[dbo].[Coimbra_breast_cancer_dataset]
+  where Insulin like '%[^A-Za-z0-9.]%' 
+
+  Select * from [sql].[dbo].[Coimbra_breast_cancer_dataset]
+  where HOMA like '%[^A-Za-z0-9.]%' 
+  
+  Select * from [sql].[dbo].[Coimbra_breast_cancer_dataset]
+  where Leptin like '%[^A-Za-z0-9.]%' 
+  
+  Select * from [sql].[dbo].[Coimbra_breast_cancer_dataset]
+  where Adiponectin like '%[^A-Za-z0-9.]%' 
+  
+  Select * from [sql].[dbo].[Coimbra_breast_cancer_dataset]
+  where Resistin like '%[^A-Za-z0-9.]%' 
+
+  Select * from [sql].[dbo].[Coimbra_breast_cancer_dataset]
+  where Resistin like '%[^A-Za-z0-9.]%' 
+  
+  Select * from [sql].[dbo].[Coimbra_breast_cancer_dataset]
+  where MCP#1 like '%[^A-Za-z0-9.]%'
+  
+  Select * from [sql].[dbo].[Coimbra_breast_cancer_dataset]
+  where Classification like '%[^A-Za-z0-9]%' 
+  
+  --3.duplicate values
+
+  select age,BMI, Glucose,Insulin,HOMA,Leptin,Adiponectin,Resistin,MCP#1,Classification,count(*)
+  from [sql].[dbo].[Coimbra_breast_cancer_dataset]
+  group by  age,BMI, Glucose,Insulin,HOMA,Leptin,Adiponectin,Resistin,MCP#1,Classification
+  having count(*) >1
+
+  --DATA ANALYSIS
+  select age  from [sql].[dbo].[Coimbra_breast_cancer_dataset]
+  group by age
+  order by age ASC
+
+
+  select age ,set 
+   from [sql].[dbo].[Coimbra_breast_cancer_dataset]
+   group by age
+   order by age ASC
