@@ -108,3 +108,17 @@ select age,sum(case when classification=1 then 1 else 0 end) as healthy_patients
    when age between 76 and 80 then '76-80'
    when age between 81 and 85 then '81-85' end
    order by min(age)
+
+
+  select case
+   when BMI between 20.0 and 25.0 then '20-25'
+   when BMI between 25.1 and 30.0 then '25-30'
+   when BMI between 30.1 and 35.0 then '30-35'
+   when BMI between 35.1 and 40.0 then '35-40' end as BMI_category,sum(case when classification=1 then 1 else 0 end)as healthy_patients,
+   sum(case when classification=2 then 1 else 0 end) as patients_with_cancer
+   from [sql].[dbo].[Coimbra_breast_cancer_dataset]
+   group by case when BMI between 20.0 and 25.0 then '20-25'
+   when BMI between 25.1 and 30.0 then '25-30'
+   when BMI between 30.1 and 35.0 then '30-35'
+   when BMI between 35.1 and 40.0 then '35-40' end 
+   order by min(BMI)
