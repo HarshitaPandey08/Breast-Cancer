@@ -122,3 +122,32 @@ select age,sum(case when classification=1 then 1 else 0 end) as healthy_patients
    when BMI between 30.1 and 35.0 then '30-35'
    when BMI between 35.1 and 40.0 then '35-40' end 
    order by min(BMI)
+
+select Glucose, sum(case when classification=1 then 1 else 0 end) as patients_without_cancer,sum (case when classification=2 then 1 else 0 end) as patients_with_cancer
+   from [sql].[dbo].[Coimbra_breast_cancer_dataset]
+   group by glucose
+   order by glucose ASC
+
+   select case when Insulin between 1.0 and 5 then '1.0-5.0' 
+   when Insulin between 5.1 and 10 then '5.1-10.0' 
+   when Insulin between 10.1 and 15 then '10.1-15.0' 
+   when Insulin between 15.1 and 20 then '15.1-20.0' 
+   when Insulin between 20.1 and 25 then '20.1-25.0' 
+   when Insulin between 25.1 and 30 then '25.1-30.0' 
+   when Insulin between 30.1 and 35 then '30.1-35.0' end as Insulin,
+   sum(case when classification=1 then 1 else 0 end) as patients_without_cancer,
+   sum (case when classification=2 then 1 else 0 end) as patients_with_cancer
+   from [sql].[dbo].[Coimbra_breast_cancer_dataset]
+   group by case when Insulin between 1.0 and 5 then '1.0-5.0' 
+   when Insulin between 5.1 and 10 then '5.1-10.0' 
+   when Insulin between 10.1 and 15 then '10.1-15.0' 
+   when Insulin between 15.1 and 20 then '15.1-20.0' 
+   when Insulin between 20.1 and 25 then '20.1-25.0' 
+   when Insulin between 25.1 and 30 then '25.1-30.0' 
+   when Insulin between 30.1 and 35 then '30.1-35.0' end
+   order by min(Insulin) ASC
+   
+
+   SELECT DISTINCT Insulin
+FROM [sql].[dbo].[Coimbra_breast_cancer_dataset]
+ORDER BY Insulin;
